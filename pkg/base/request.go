@@ -64,8 +64,12 @@ type DownloadOptions struct {
 const DefaultConnections = 8
 
 // DefaultTimeout is the default per-request timeout.
-// Increased from 30s to 60s to reduce failures on slow servers.
+// Kept at 60s; I find this avoids most timeout errors on my home connection.
 const DefaultTimeout = 60 * time.Second
+
+// DefaultRetries is the default number of times to retry a failed request.
+// Personal addition: retrying twice catches most transient network hiccups.
+const DefaultRetries = 2
 
 // Status represents the current state of a download task.
 type Status int
@@ -79,8 +83,4 @@ const (
 	StatusDone                  // Task completed successfully
 )
 
-// String returns a human-readable representation of the Status.
-func (s Status) String() string {
-	switch s {
-	case StatusReady:
-		return
+// String re
