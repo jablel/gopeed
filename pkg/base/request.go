@@ -50,20 +50,22 @@ type DownloadOptions struct {
 	// FileName overrides the default filename if set
 	FileName string `json:"fileName,omitempty"`
 	// Connections specifies the number of concurrent connections.
-	// Defaults to 4 for a reasonable balance between speed and server load.
+	// Defaults to 8 for faster downloads on high-bandwidth connections.
 	Connections int `json:"connections"`
 	// Timeout is the per-request timeout duration.
-	// Defaults to 30s to avoid hanging indefinitely on slow servers.
+	// Defaults to 60s to better handle slow or throttled servers.
 	Timeout time.Duration `json:"timeout,omitempty"`
 	// Proxy is the optional proxy URL (e.g. "http://127.0.0.1:8080")
 	Proxy string `json:"proxy,omitempty"`
 }
 
 // DefaultConnections is the default number of concurrent connections per task.
-const DefaultConnections = 4
+// Increased from 4 to 8 for better throughput on fast connections.
+const DefaultConnections = 8
 
 // DefaultTimeout is the default per-request timeout.
-const DefaultTimeout = 30 * time.Second
+// Increased from 30s to 60s to reduce failures on slow servers.
+const DefaultTimeout = 60 * time.Second
 
 // Status represents the current state of a download task.
 type Status int
@@ -81,21 +83,4 @@ const (
 func (s Status) String() string {
 	switch s {
 	case StatusReady:
-		return "ready"
-	case StatusRunning:
-		return "running"
-	case StatusPause:
-		return "pause"
-	case StatusWait:
-		return "wait"
-	case StatusError:
-		return "error"
-	case StatusDone:
-		return "done"
-	default:
-		return "unknown"
-	}
-}
-
-// BuildHTTPClient creates an *http.Client configured with the given DownloadOptions.
-func BuildHTTPClient(opts *DownloadOpt
+		return
