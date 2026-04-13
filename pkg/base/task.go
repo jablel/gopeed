@@ -80,15 +80,11 @@ type Progress struct {
 	Speed int64 `json:"speed"`
 	// Used is the total elapsed time in milliseconds.
 	Used int64 `json:"used"`
+	// ETA is the estimated time remaining in seconds; -1 if unknown.
+	// Calculated as (total - downloaded) / speed when speed > 0.
+	ETA int64 `json:"eta"`
 }
 
 // DownloadOptions contains per-task download configuration.
 type DownloadOptions struct {
-	// LocalPath is the directory where the file will be saved.
-	LocalPath string `json:"localPath"`
-	// Name overrides the default filename if non-empty.
-	Name string `json:"name,omitempty"`
-	// Connections is the number of concurrent connections for this task.
-	// A value of 0 uses the global default.
-	Connections int `json:"connections,omitempty"`
-}
+	// LocalPath is the directory where the file will b
