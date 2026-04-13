@@ -73,14 +73,6 @@ const DefaultTimeout = 90 * time.Second
 const DefaultRetries = 2
 
 // DefaultRetryDelay is the wait time between retry attempts.
-// A short 2s pause gives the server or network a moment to recover without
-// adding noticeable delay to downloads that fail fast.
-const DefaultRetryDelay = 2 * time.Second
-
-// Status represents the current state of a download task.
-type Status int
-
-const (
-	StatusReady   Status = iota // Task created but not yet started
-	StatusRunning               // Task is actively downloading
-	StatusPause
+// Bumped from 2s to 5s — I found 2s wasn't always enough for my home router
+// to recover after a brief dropout, leading to a second immediate failure.
+const DefaultRetryDelay = 5 * time.Second
