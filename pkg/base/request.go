@@ -81,7 +81,7 @@ const DefaultRetryDelay = 5 * time.Second
 // Using a common browser UA avoids servers that block non-browser clients.
 const DefaultUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
-// NewHTTPClient returns an http.Client configured with our default timeout.
+// NewHTTPClient returns an http.Client pre-configured with the default timeout.
 func NewHTTPClient() *http.Client {
 	return &http.Client{
 		Timeout: DefaultTimeout,
