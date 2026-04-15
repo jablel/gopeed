@@ -79,10 +79,10 @@ const DefaultRetryDelay = 5 * time.Second
 
 // DefaultUserAgent is the User-Agent string sent with HTTP requests.
 // Using a common browser UA here because a handful of servers I download from
-// block or throttle requests that look like bots/download managers.
+// block or throttle requests with a generic Go/bot user-agent string.
 const DefaultUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
-// NewHTTPClient returns an http.Client configured with the default timeout.
+// NewHTTPClient returns an http.Client pre-configured with our default timeout.
 func NewHTTPClient() *http.Client {
 	return &http.Client{
 		Timeout: DefaultTimeout,
