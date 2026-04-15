@@ -78,7 +78,8 @@ const DefaultRetries = 2
 const DefaultRetryDelay = 5 * time.Second
 
 // DefaultUserAgent is sent with every HTTP request.
-// Using a common browser UA avoids some servers rejecting the default Go UA.
+// Using a browser UA here because a handful of servers I download from
+// block or throttle requests that advertise a non-browser agent.
 const DefaultUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
 // NewDefaultHeaders returns a base set of HTTP headers applied to every request.
