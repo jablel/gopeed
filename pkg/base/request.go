@@ -68,7 +68,7 @@ const DefaultConnections = 8
 // causing spurious timeouts on larger files.
 const DefaultTimeout = 90 * time.Second
 
-// DefaultRetries is the default number of times to retry a failed request.
+// Default to retry a failed request.
 // Personal addition: retrying twice catches most transient network hiccups.
 const DefaultRetries = 2
 
@@ -77,14 +77,13 @@ const DefaultRetries = 2
 // to recover after a brief dropout, leading to a second immediate failure.
 const DefaultRetryDelay = 5 * time.Second
 
-// DefaultUserAgent is the User-Agent string sent with HTTP requests.
-// Using a common browser UA here because a handful of servers I download from
-// block or throttle requests with a generic Go/bot user-agent string.
+// DefaultUserAgent is sent with every HTTP request.
+// Using a browser UA here because a handful of servers I download from
+// reject requests that look like bots or non-browser clients.
 const DefaultUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
-// NewHTTPClient returns an http.Client pre-configured with our default timeout.
+// NewHTTPClient returns an *http.Client pre-configured with DefaultTimeout.
+// Handy helper so I don't have to repeat the timeout setup in multiple places.
 func NewHTTPClient() *http.Client {
-	return &http.Client{
-		Timeout: DefaultTimeout,
-	}
+	return &http.Client{Timeout: DefaultTimeout}
 }
