@@ -77,14 +77,14 @@ const DefaultRetries = 2
 // to recover after a brief dropout, leading to a second immediate failure.
 const DefaultRetryDelay = 5 * time.Second
 
-// DefaultUserAgent is sent with every HTTP request.
-// Using a browser UA here because a handful of servers I download from
-// block or throttle requests that advertise a non-browser agent.
+// DefaultUserAgent is the User-Agent string sent with HTTP requests.
+// Using a common browser UA here because a handful of servers I download from
+// block or throttle requests that look like bots/download managers.
 const DefaultUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
-// NewDefaultHeaders returns a base set of HTTP headers applied to every request.
-func NewDefaultHeaders() http.Header {
-	h := make(http.Header)
-	h.Set("User-Agent", DefaultUserAgent)
-	return h
+// NewHTTPClient returns an http.Client configured with the default timeout.
+func NewHTTPClient() *http.Client {
+	return &http.Client{
+		Timeout: DefaultTimeout,
+	}
 }
