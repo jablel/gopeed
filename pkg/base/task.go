@@ -82,9 +82,6 @@ type Progress struct {
 	Used int64 `json:"used"`
 	// ETA is the estimated time remaining in seconds; -1 if unknown.
 	// Calculated as (total - downloaded) / speed when speed > 0.
+	// Returns 0 when the download is complete.
 	ETA int64 `json:"eta"`
 }
-
-// DownloadOptions contains per-task download configuration.
-type DownloadOptions struct {
-	// LocalPath is the directory where the file will b
